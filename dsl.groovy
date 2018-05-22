@@ -1,4 +1,4 @@
-folder('Demo')
+folder('Demo2')
 
 deliveryPipelineView('Demo/Pipeline') {
 
