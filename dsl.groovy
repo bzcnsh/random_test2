@@ -3,13 +3,13 @@ def project = 'random_test'
 def branchApi = new URL("https://api.github.com/repos/${gituser}/${project}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branchApi.newReader())
 
-folder(project)
+folder("${project}_folder")
 branches.each {
   def branchName = it.name
   def testJobName = "${project}-${branchName}-test".replaceAll('/','-')
   def applyJobName = "${project}-${branchName}-apply".replaceAll('/','-')
 
-  deliveryPipelineView("${project}/${branchName}") {
+  deliveryPipelineView("${project}_folder/${branchName}") {
       pipelineInstances(5)
       allowPipelineStart()
       enableManualTriggers()
