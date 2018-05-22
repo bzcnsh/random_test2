@@ -1,18 +1,18 @@
 folder('Demo2')
 
-deliveryPipelineView('Demo/Pipeline') {
+deliveryPipelineView('Demo2/Pipeline') {
 
     pipelineInstances(5)
     allowPipelineStart()
     enableManualTriggers()
     showChangeLog()
     pipelines {
-        component('Component', 'Demo/Build')
+        component('Component', 'Demo2/Build')
     }
 
 }
 
-job('Demo/Build') {
+job('Demo2/Build') {
     deliveryPipelineConfiguration("Build", "Build")
     scm {
         git {
@@ -25,12 +25,12 @@ job('Demo/Build') {
         deliveryPipelineVersion('1.0.0.\$BUILD_NUMBER', true)
     }
     publishers {
-        buildPipelineTrigger('Demo/DeployCI') {
+        buildPipelineTrigger('Demo2/DeployCI') {
         }
     }
 }
 
-job('Demo/Sonar') {
+job('Demo2/Sonar') {
     deliveryPipelineConfiguration("Build", "Sonar")
     scm {
         git {
@@ -51,7 +51,7 @@ job('Demo/Sonar') {
     }
 }
 
-job('Demo/DeployCI') {
+job('Demo2/DeployCI') {
     deliveryPipelineConfiguration("CI", "Deploy")
 
     wrappers {
@@ -65,12 +65,12 @@ job('Demo/DeployCI') {
     }
 
     publishers {
-        buildPipelineTrigger('Demo/TestCI') {
+        buildPipelineTrigger('Demo2/TestCI') {
         }
     }
 }
 
-job('Demo/TestCI') {
+job('Demo2/TestCI') {
     deliveryPipelineConfiguration("CI", "Test")
 
     wrappers {
@@ -85,12 +85,12 @@ job('Demo/TestCI') {
 
 
     publishers {
-        buildPipelineTrigger('Demo/DeployQA') {
+        buildPipelineTrigger('Demo2/DeployQA') {
         }
     }
 }
 
-job('Demo/DeployQA') {
+job('Demo2/DeployQA') {
     deliveryPipelineConfiguration("QA", "Deploy")
 
     wrappers {
@@ -104,12 +104,12 @@ job('Demo/DeployQA') {
     }
 
     publishers {
-        buildPipelineTrigger('Demo/TestQA') {
+        buildPipelineTrigger('Demo2/TestQA') {
         }
     }
 }
 
-job('Demo/TestQA') {
+job('Demo2/TestQA') {
     deliveryPipelineConfiguration("QA", "Test")
 
     wrappers {
@@ -124,12 +124,12 @@ job('Demo/TestQA') {
 
 
     publishers {
-        buildPipelineTrigger('Demo/DeployProd') {
+        buildPipelineTrigger('Demo2/DeployProd') {
         }
     }
 }
 
-job('Demo/DeployProd') {
+job('Demo2/DeployProd') {
     deliveryPipelineConfiguration("Prod", "Deploy")
 
     wrappers {
@@ -143,12 +143,12 @@ job('Demo/DeployProd') {
     }
 
     publishers {
-        buildPipelineTrigger('Demo/TestProd') {
+        buildPipelineTrigger('Demo2/TestProd') {
         }
     }
 }
 
-job('Demo/TestProd') {
+job('Demo2/TestProd') {
     deliveryPipelineConfiguration("Prod", "Test")
 
     wrappers {
